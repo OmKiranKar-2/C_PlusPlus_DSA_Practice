@@ -1,6 +1,7 @@
 // Smallest and Largest Number in an Array
 #include<iostream>
 #include<climits>
+
 int main()
 {
     short int a[6] = {3,2,6,1,9,8};
