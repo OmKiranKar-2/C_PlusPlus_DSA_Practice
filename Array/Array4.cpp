@@ -1,11 +1,11 @@
 //Linear Search
 #include<iostream>
 
-int linearSearch(short int arr[], short int target)
+int linearSearch(short int arr[], short int target) // short int arr[] is short int* arr -> Returns pointer
 {
     for(int i=0;i<7;i++)
     {
-        if(arr[i]==target)
+        if(*(arr+i)==target)
         {
             return i;
         }
