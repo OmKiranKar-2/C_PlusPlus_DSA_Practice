@@ -5,14 +5,26 @@ int main()
 {
     // Kadane's Algorithm
     std::vector<int> vec = {-2,1,-3,4,-1,2,1,-5,4}; //Maximum Subarray -> 4,-1,2,1 -> 6
-    int max=vec[0],add=0;
+    int add=0,max=INT_MIN;
     for(int i=0;i<vec.size();i++)
     {
         add += vec[i];
-        if(add < vec[i]) add=vec[i];
-        max = std::max(max,add);
+        max = std::max(add,max);
+        if(add<0) add=0;
     }
     std::cout<<"Maximum Subarray: "<<max;
+
+
+    // // Kadane's Algorithm - Modified
+    // std::vector<int> vec = {-2,1,-3,4,-1,2,1,-5,4}; //Maximum Subarray -> 4,-1,2,1 -> 6
+    // int max=vec[0],add=0;
+    // for(int i=0;i<vec.size();i++)
+    // {
+    //     add += vec[i];
+    //     if(add < vec[i]) add=vec[i];
+    //     max = std::max(max,add);
+    // }
+    // std::cout<<"Maximum Subarray: "<<max;
 
     // // Brute Force
     // std::vector<int> vec = {-2,1,-3,4,-1,2,1,-5,4};
