@@ -1,7 +1,0 @@
-// https://leetcode.com/problems/majority-element/
-#include<iostream>
-int main()
-{
-    
-    return 0;
-}
