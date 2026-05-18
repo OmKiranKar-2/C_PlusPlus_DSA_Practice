@@ -9,18 +9,15 @@ int fibonacci(int n)
     return fibonacci(n-1) + fibonacci(n-2);
 }
 
-// My another approach
+// // My another approach
 // int fibonacci(int firstNum, int secondNum, int n)
 // {
-//     while(n>2)
+//     if(n==0) return firstNum;
+//     if(n==1 || n==2)
 //     {
-//         int thirdNum = firstNum + secondNum;
-//         firstNum = secondNum;
-//         secondNum = thirdNum;
-//         std::cout<<thirdNum<<" ";
-//         return fibonacci(firstNum,secondNum,n-1);
+//         return firstNum + secondNum;
 //     }
-//     return 0;
+//     return fibonacci(secondNum,firstNum + secondNum,n-1);
 // }
 
 int main()
@@ -29,8 +26,6 @@ int main()
     std::cout<<"Enter Number: ";
     std::cin>>n;
     std::cout<<"Fibonacci is: "<<fibonacci(n);
-    // int firstNum=0, secondNum=1;
-    // std::cout<<firstNum<<" "<<secondNum<<" ";
-    // fibonacci(firstNum, secondNum,n);
+    // std::cout<<fibonacci(0, 1, n);
     return 0;
 }
