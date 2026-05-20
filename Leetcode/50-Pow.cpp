@@ -10,7 +10,44 @@ int main()
     std::cout<<"Enter power: ";
     std::cin>>pow;
 
-    // Optimized Approach
+    // Optimized Approach -> Take binary form of the power -> TC: O(log n)
+    double powSum = 1;
+    if(pow < 0)
+    {
+        num = 1/num;
+        pow = -pow;
+    }
+    while(pow>0)
+    {
+        if(pow%2==1)
+        {
+            powSum *= num;
+        }
+        num *= num;
+        pow /=2;
+    }
+    std::cout<<powSum;
+
+    // // More clean code but TC is similar as previous one
+    // double powSum = num; int i;
+    // if(pow<0)
+    // {
+    //     pow = -pow;
+    //     powSum = 1/powSum;
+    //     num = 1/num;
+    // }
+    // for(i=2;i<=pow;i *= 2)
+    // {
+    //     powSum *= powSum;
+    // }
+    // i = i/2;
+    // for(int j=0;j<pow-i;j++)
+    // {
+    //     powSum *= num;
+    // }
+    // if(pow == 0) powSum==1;
+    // std::cout<<powSum;
+
 
     // // Better Approach than previous one, though TC can be more optimized
     // int dupPow = pow,count=0;
