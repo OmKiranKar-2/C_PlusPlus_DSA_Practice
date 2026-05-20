@@ -1,4 +1,5 @@
-// std::pow(num,pow) -> Derivation for this
+// https://leetcode.com/problems/powx-n/description/
+// std::pow(num,pow) -> Explaining this STL
 #include<iostream>
 #include<cmath>
 using namespace std;
