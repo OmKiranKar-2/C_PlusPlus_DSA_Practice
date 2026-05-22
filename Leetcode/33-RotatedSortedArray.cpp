@@ -33,8 +33,6 @@ int binarySearch(int* nums, int& target, int& size)
                 end = mid-1;
             }
         }
-
-
     }
     return -1;
 }
