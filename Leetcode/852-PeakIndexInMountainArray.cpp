@@ -2,7 +2,7 @@
 #include<iostream>
 #include<climits>
 
-int binarySearch(int* arr, int* size)
+int binarySearch(int* arr, int* size) //TC: O(logn)
 {
     int start = 1, end = *size-2;
     while(start<=end)
@@ -12,11 +12,11 @@ int binarySearch(int* arr, int* size)
         {
             return mid;
         }
-        else if(arr[mid]>arr[mid-1]) // Left Side Sorted
+        else if(arr[mid]>arr[mid-1]) // Left Side in Increasing Fashion
         {
             start = mid+1;
         }
-        else
+        else if(arr[mid]>arr[mid+1]) // Right Side in Decreasing Fashion
         {
             end = mid-1;
         }
