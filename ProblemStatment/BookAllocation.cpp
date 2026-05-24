@@ -17,6 +17,7 @@ Return -1 if a valid assignment is not possible.
 #include<vector>
 #include<climits>
 
+// Minimize the Maximum Value
 bool validCheck(std::vector<int>& vec, int& n, int& m, int& maxAllowedPages)
 {
     int sum=0, studentCount=1;
@@ -37,7 +38,7 @@ bool validCheck(std::vector<int>& vec, int& n, int& m, int& maxAllowedPages)
     return false;
 }
 
-int bookAllocation(std::vector<int>& vec,int& n, int& m) // TC: O(n*log n)
+int bookAllocation(std::vector<int>& vec,int& n, int& m) // TC: O(n*log sum)
 {
     if(n<m)
     {
@@ -65,7 +66,8 @@ int bookAllocation(std::vector<int>& vec,int& n, int& m) // TC: O(n*log n)
     return answer;
 }
 
-// // To find Maximum Value of Minimum Allocated pages code: (Below is the code)
+// // To find Maximum Value of Minimum Allocated pages code
+// // Maximize the Minimum Value
 // bool validCheck(std::vector<int>& vec, int& n, int& m, int& minimumAllocatedMaximumPages)
 // {
 //     int sum=0,studentCount=0;
