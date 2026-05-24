@@ -17,50 +17,93 @@ Return -1 if a valid assignment is not possible.
 #include<vector>
 #include<climits>
 
-bool validCheck(std::vector<int>& vec, int& n, int& m, int& maxAllowedPages)
+// bool validCheck(std::vector<int>& vec, int& n, int& m, int& maxAllowedPages)
+// {
+//     int sum=0, studentCount=1;
+//     for(int i=0;i<n;i++)
+//     {
+//         if(vec[i]>maxAllowedPages)
+//         {
+//             return false;
+//         }
+//         sum += vec[i];
+//         if(sum>maxAllowedPages)
+//         {
+//             sum = vec[i];
+//             studentCount++;
+//         }
+//     }
+//     if(studentCount<=m) return true;
+//     return false;
+// }
+
+// int bookAllocation(std::vector<int>& vec,int& n, int& m) // TC: O(n*log n)
+// {
+//     if(n<m)
+//     {
+//         return -1;
+//     }
+//     int sum=0;
+//     for(int i=0;i<n;i++)
+//     {
+//         sum += vec[i];
+//     }
+//     int minPages=1, maxPages=sum, answer; // Range of all possible solution
+//     while(minPages<=maxPages)
+//     {
+//         int maxAllowedPages = minPages + (maxPages-minPages)/2;
+//         if(validCheck(vec,n,m,maxAllowedPages)) // Solution is valid, studentCount<=m
+//         {
+//             maxPages = maxAllowedPages - 1;
+//             answer = maxAllowedPages;
+//         }
+//         else // Solution is invalid, studentCount>m
+//         {
+//             minPages = maxAllowedPages + 1;
+//         }
+//     }
+//     return answer;
+// }
+
+// To find Maximum Value of Minimum Allocated pages code: (Below is the code)
+bool validCheck(std::vector<int>& vec, int& n, int& m, int& minimumAllocatedMaximumPages)
 {
-    int sum=0, studentCount=1;
+    int sum=0,studentCount=0;
     for(int i=0;i<n;i++)
     {
-        if(vec[i]>maxAllowedPages)
-        {
-            return false;
-        }
         sum += vec[i];
-        if(sum>maxAllowedPages)
+        if(sum>=minimumAllocatedMaximumPages)
         {
-            sum = vec[i];
-            studentCount++;
+            sum = 0;
+            studentCount ++;
         }
     }
-    if(studentCount<=m) return true;
+    if(studentCount>=m) return true;
     return false;
 }
-
-// Using Binary Search
-int bookAllocation(std::vector<int>& vec,int& n, int& m) // TC: O(n*log n)
+int bookAllocation(std::vector<int>& vec,int& n, int& m)
 {
-    if(n<m)
+    if(m>n)
     {
         return -1;
     }
-    int sum=0;
+    int minPages=INT_MAX,maxPages=0, answer;
     for(int i=0;i<n;i++)
     {
-        sum += vec[i];
+        maxPages += vec[i];
+        minPages = std::min(minPages,vec[i]);
     }
-    int minPages=1, maxPages=sum, answer; // Range of all possible solution
-    while(minPages<=maxPages)
+    while(maxPages>=minPages)
     {
-        int maxAllowedPages = minPages + (maxPages-minPages)/2;
-        if(validCheck(vec,n,m,maxAllowedPages)) // Solution is valid, studentCount<=m
+        int minimumAllocatedMaximumPages = minPages + (maxPages-minPages)/2;
+        if(validCheck(vec, n, m, minimumAllocatedMaximumPages))
         {
-            maxPages = maxAllowedPages - 1;
-            answer = maxAllowedPages;
+            minPages = minimumAllocatedMaximumPages + 1;
+            answer = minimumAllocatedMaximumPages;
         }
-        else // Solution is invalid, studentCount>m
+        else
         {
-            minPages = maxAllowedPages + 1;
+            maxPages = minimumAllocatedMaximumPages - 1;
         }
     }
     return answer;
@@ -103,5 +146,6 @@ int main()
     int n=vec.size();
     int m=2; // 2 Allocation of minimum number of maximum page: 2,1,3 (6) & 4 (4). Answer: 6
     std::cout<<"Minimum Value of Maximum Allocated Pages: "<<bookAllocation(vec,n,m);
+    // std::cout<<"Maximum Value of Minimum Allocated Pages: "<<bookAllocation(vec,n,m);
     return 0;
 }
