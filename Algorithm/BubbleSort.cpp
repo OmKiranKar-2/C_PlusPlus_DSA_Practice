@@ -1,15 +1,8 @@
 // Compare adjacent elements
 // Push the larger element at last
+// n-1 iterations
 // TC: O(n^2)
 #include<iostream>
-
-void printArray(int* arr,int* size)
-{
-    for(int i=0;i<*size;i++)
-    {
-        std::cout<<arr[i]<<" ";
-    }
-}
 
 void bubbleSort(int* arr, int* size) // Sorting in ascending order
 {
@@ -26,7 +19,6 @@ void bubbleSort(int* arr, int* size) // Sorting in ascending order
         }
         if(!anyChange) break; // Array is already sorted
     }
-    printArray(arr,size);
 }
 
 int main()
@@ -34,5 +26,9 @@ int main()
     int arr[] = {4,6,5,2,3,1};
     int size = sizeof(arr)/sizeof(int);
     bubbleSort(arr,&size);
+    for(int i=0;i<size;i++)
+    {
+        std::cout<<arr[i]<<" ";
+    }
     return 0;
 }
