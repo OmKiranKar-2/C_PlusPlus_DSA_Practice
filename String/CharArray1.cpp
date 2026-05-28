@@ -18,6 +18,5 @@ int main()
     std::cout<<"Enter String: ";
     std::cin.getline(ch2,100,'\n'); // To input a string. (string,length,delimiter). If no delimiter written, then by default new line '\n' acts as a delimiter
     std::cout<<ch2;
-
     return 0;
 }
