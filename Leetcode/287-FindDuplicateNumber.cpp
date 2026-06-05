@@ -9,7 +9,7 @@
 // // TC: O(n)
 int findDuplicate(std::vector<int>& nums)
 {
-    int slowPtr = nums[0], fastPtr = nums[0];
+    int slowPtr = nums[0], fastPtr = nums[0]; // Or slowPtr = 0, fastPtr = 0; in Step2, slowPtr will be zero
     // Increase till slow==fast
     do
     {
