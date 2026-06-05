@@ -9,7 +9,8 @@
 // // TC: O(n)
 int findDuplicate(std::vector<int>& nums)
 {
-    int slowPtr = nums[0], fastPtr = nums[0];
+    // int slowPtr = nums[0], fastPtr = nums[0]; // Even this will work
+    int slowPtr =0, fastPtr=0;
     // Increase till slow==fast
     do
     {
@@ -18,7 +19,8 @@ int findDuplicate(std::vector<int>& nums)
     }
     while (slowPtr!=fastPtr);
 
-    slowPtr = nums[0]; // Step2
+    // slowPtr = nums[0]; // Step2
+    slowPtr = 0; // Step2
     while(slowPtr!=fastPtr)
     {
         slowPtr = nums[slowPtr]; // Increase +1
