@@ -6,38 +6,74 @@
 #include<algorithm>
 #include<unordered_set>
 
-// // Optimized Approach : Hashing. SC: O(n)
-// std::vector<std::vector<int>> threeSum(std::vector<int> nums)
-// {
-
-// }
-
-// More Optimal Approach : Hashing. // TC: O(n^2 * log(unique triplets))
+// Optimized Approach : 2-Pointer Approach. TC: o(n^2 * nlogn), SC: O(unique triplets)
 std::vector<std::vector<int>> threeSum(std::vector<int> nums)
 {
-    std::set<std::vector<int>> s1; // To store unique triplets
+    std::sort(nums.begin(),nums.end());
     std::vector<std::vector<int>> answer;
     for(int i=0;i<nums.size();i++)
     {
-        std::unordered_set<int> s2; // To store every element in sets
-        for(int j=i+1;j<nums.size();j++)
+        if(i>0 && nums[i]==nums[i-1])
         {
-            int k = -(nums[i]+nums[j]);
-            if(s2.find(k)!=s2.end())
+            continue;
+        }
+        int start=i+1, end=nums.size()-1;
+        while(start<end)
+        {
+            if(nums[i]+nums[start]+nums[end]==0)
             {
-                std::vector<int> vec{nums[i],nums[j],k};
-                std::sort(vec.begin(),vec.end());
-                if(s1.find(vec)==s1.end())
+                
+                answer.push_back({nums[i],nums[start],nums[end]});
+                // std::vector<int> vec{nums[i],nums[start],nums[end]};
+                // if(answer.size()==0 || answer[answer.size()-1] != vec)
+                // {
+                //     answer.emplace_back(vec);
+                // }
+                start++; end--;
+                while(start<end && nums[start]==nums[start-1])
                 {
-                    answer.emplace_back(vec);
-                    s1.emplace(vec);
+                    start++;
                 }
             }
-            s2.emplace(nums[j]);
+            else if(nums[i]+nums[start]+nums[end]<0)
+            {
+                start++;
+            }
+            else
+            {
+                end--;
+            }
         }
     }
     return answer;
 }
+
+// // More Optimal Approach : Hashing. // TC: O(n^2 * log(unique triplets))
+// std::vector<std::vector<int>> threeSum(std::vector<int> nums)
+// {
+//     std::set<std::vector<int>> s1; // To store unique triplets
+//     std::vector<std::vector<int>> answer;
+//     for(int i=0;i<nums.size();i++)
+//     {
+//         std::unordered_set<int> s2; // To store every element in sets
+//         for(int j=i+1;j<nums.size();j++)
+//         {
+//             int k = -(nums[i]+nums[j]);
+//             if(s2.find(k)!=s2.end())
+//             {
+//                 std::vector<int> vec{nums[i],nums[j],k};
+//                 std::sort(vec.begin(),vec.end());
+//                 if(s1.find(vec)==s1.end())
+//                 {
+//                     answer.emplace_back(vec);
+//                     s1.emplace(vec);
+//                 }
+//             }
+//             s2.emplace(nums[j]);
+//         }
+//     }
+//     return answer;
+// }
 
 // // Brute Force Approach. TC: O(n^3 * log (uniquetriplets)); SC: O(unique triplets)
 // std::vector<std::vector<int>> threeSum(std::vector<int> nums)
