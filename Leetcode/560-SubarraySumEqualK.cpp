@@ -3,9 +3,9 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
-#include<unordered_map>
+#include<unordered_map> // TC: O(1)
 
-// Optmized Approach, TC: O(n), SC: O(1)
+// Optmized Approach, TC: O(n), SC: O(n)
 // Prefix Sum Approach Used. It is a very important concept
 int subArraySum(std::vector<int>& nums, int k)
 {
