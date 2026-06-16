@@ -7,7 +7,8 @@
 #include<algorithm>
 
 // Optimized Approach: After excluding duplicate element from graph, do not include to avoid repition
-void helperFunction(std::vector<int>& nums,std::vector<int>& tempArray, int currentIdx, std::vector<std::vector<int>>& answer, std::set<std::vector<int>>& s)
+// TC: O(n * 2^n), SC: O(n * 2^n)
+void helperFunction(std::vector<int>& nums,std::vector<int>& tempArray, int currentIdx, std::vector<std::vector<int>>& answer)
 {
     if(currentIdx == nums.size())
     {
@@ -15,14 +16,14 @@ void helperFunction(std::vector<int>& nums,std::vector<int>& tempArray, int curr
         return;
     }
     tempArray.emplace_back(nums[currentIdx]);
-    helperFunction(nums,tempArray,currentIdx+1,answer,s);
+    helperFunction(nums,tempArray,currentIdx+1,answer);
     tempArray.pop_back();
     int tempIdx = currentIdx+1;
     while(tempIdx<nums.size() && nums[tempIdx]==nums[tempIdx-1]) // To skip from including duplicate elements
     {
         tempIdx++;
     }
-    helperFunction(nums,tempArray,tempIdx,answer,s);
+    helperFunction(nums,tempArray,tempIdx,answer);
 }
 
 // // Approach using sets [Intuitive approach though TC and SC increases a bit]
@@ -48,9 +49,9 @@ std::vector<std::vector<int>> subsets(std::vector<int>& nums)
 {
     std::vector<std::vector<int>> answer;
     std::vector<int> tempArray;
-    std::set<std::vector<int>> s;
-    sort(nums.begin(),nums.end()); // Very Important step
-    helperFunction(nums,tempArray,0,answer,s);
+    sort(nums.begin(),nums.end()); // Very Important step, TC: O(n * logn)
+    // std::set<std::vector<int>> s;
+    helperFunction(nums,tempArray,0,answer);
     return answer;
 }
 
