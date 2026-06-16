@@ -4,11 +4,27 @@
 #include<iostream>
 #include<vector>
 
-// TC: , SC: 
+void helperFunction(std::vector<int>& nums, std::vector<int>& tempArray, int currentIdx,std::vector<std::vector<int>>& answer)
+{
+    if(currentIdx==nums.size())
+    {
+        answer.emplace_back(tempArray);
+        return;
+    }
+    tempArray.emplace_back(nums[currentIdx]);
+    helperFunction(nums,tempArray,currentIdx+1,answer);
+    tempArray.pop_back();
+    helperFunction(nums,tempArray,currentIdx+1,answer);
+}
+
+// 2 choice: If the element wants to be included or excluded
+// TC: O(n * 2^n), SC:O(n * 2^n)
 std::vector<std::vector<int>> subsets(std::vector<int>& nums)
 {
-    // 2 choice: If the element wants to be included or excluded
     std::vector<std::vector<int>> answer;
+    std::vector<int> tempArray;
+    helperFunction(nums,tempArray,0, answer);
+    return answer;
 }
 
 int main()
@@ -21,9 +37,9 @@ int main()
         std::cout<<"{";
         for(int j : i)
         {
-            std::cout<<j<<", ";
+            std::cout<<j<<" ";
         }
-        std::cout<<"}, ";
+        std::cout<<"} ";
     }
     std::cout<<"}";
     return 0;
