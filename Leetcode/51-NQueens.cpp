@@ -5,67 +5,55 @@
 
 bool isSafe(std::vector<std::string>& tempString,int& row, int& col, int& n)
 {
-    for(int i=0;i<=row;i++)
+    for(int i=0;i<=row;i++) // Horizontal and Vertical Check
     {
         if(tempString[row][i]=='Q' || tempString[i][col]=='Q')
         {
             return false;
         }
     }
-    int i=1;
-    while(row-i>=0 && col-i>=0)
+    for(int i=1;row-i>=0 && col-i>=0;i++) // Left Diagonal
     {
         if(tempString[row-i][col-i]=='Q')
         {
             return false;
         }
-        i++;
     }
-    i=1;
-    while(row+i<n && col+i<n)
+    for(int i=1;row-i>=0 && col+i<n;i++) // Right Diagonal
     {
-        if(tempString[row+i][col+i]=='Q')
+        if(tempString[row-i][col+i]=='Q')
         {
             return false;
         }
-        i++;
     }
     return true;
 }
 
-void helperFunction(int n, int row, int col, std::vector<std::string> tempString, std::vector<std::vector<std::string>>& answer, int count)
+// TC: O(n!)
+void helperFunction(int n, int row, std::vector<std::string>& tempString, std::vector<std::vector<std::string>>& answer)
 {
-    if(count==n)
+    if(row==n)
     {
         answer.emplace_back(tempString);
         return;
     }
-    else if(count < row)
+    for(int col=0;col<n;col++)
     {
-        return;
-    }
-    if(col == n)
-    {
-        helperFunction(n,row+1,0,tempString,answer,count);
-    }
-    else if(isSafe(tempString,row,col,n))
-    {
-        tempString[row][col] = 'Q';
-        count++;
-        helperFunction(n,row+1,0,tempString,answer,count);
-    }
-    else
-    {
-        helperFunction(n,row,col+1,tempString,answer,count);
+        if(isSafe(tempString,row,col,n))
+        {
+            tempString[row][col] = 'Q';
+            helperFunction(n,row+1,tempString,answer);
+            tempString[row][col] = '.'; // Backtracking
+        }
     }
 }
 
 std::vector<std::vector<std::string>> nQueens(int n)
 {
     int row=0,col=0;
-    std::vector<std::string> tempString(n,".");
+    std::vector<std::string> tempString(n,std::string(n,'.')); // Initialize every element as '.'
     std::vector<std::vector<std::string>> answer;
-    helperFunction(n,row,col,tempString,answer,0);
+    helperFunction(n,row,tempString,answer);
     return answer;
 }
 
