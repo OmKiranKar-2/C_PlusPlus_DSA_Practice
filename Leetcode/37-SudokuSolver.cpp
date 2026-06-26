@@ -12,7 +12,7 @@ void helperFunction(std::vector<std::vector<char>>& board, int& row, int& col)
 
 void sudokuSolver(std::vector<std::vector<char>>& board)
 {
-
+    
 }
 
 int main()
