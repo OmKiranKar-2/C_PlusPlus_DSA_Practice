@@ -58,6 +58,7 @@ bool helperFunction(std::vector<std::vector<char>>& board, int row, int col)
     return false;
 }
 
+// TC: O(9^empty cells)
 void sudokuSolver(std::vector<std::vector<char>>& board)
 {
     helperFunction(board,0,0);
