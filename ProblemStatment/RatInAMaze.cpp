@@ -12,48 +12,30 @@ You can travel through one cell only one time in one possible way.
 #include<iostream>
 #include<vector>
 
-void helperFunction(std::vector<std::vector<int>>& maze, std::string& tempString, std::vector<std::string>& answer, int row, int col)
+void helperFunction(std::vector<std::vector<int>>& maze, std::string tempString, std::vector<std::string>& answer, int row, int col)
 {
     if(row == maze.size()-1 && col == maze.size()-1)
     {
         answer.emplace_back(tempString);
         return;
     }
-    // if(col == -1 || col == maze.size() || row==-1 || row==maze.size())
-    // {
-    //     return;
-    // }
-    if(col<maze.size()-1 && maze[row][col+1] == 1) // Right Column
+    if(col == -1 || col == maze.size() || row==-1 || row==maze.size() || maze[row][col]==0 || maze[row][col]==-1)
     {
-        tempString += 'R';
-        helperFunction(maze, tempString, answer, row, col+1);
-        tempString.pop_back();
+        return;
     }
-    if(row<maze.size()-1 && maze[row+1][col] == 1) // Down Row
-    {
-        tempString += 'D';
-        helperFunction(maze, tempString, answer, row+1, col);
-        tempString.pop_back();
-    }
-    // if(col > 0 && maze[row][col-1] == 1) // Left Column
-    // {
-    //     tempString += 'L';
-    //     helperFunction(maze, tempString, answer, row, col-1);
-    //     tempString.pop_back();
-    // }
-    // if(row > 0 && maze[row-1][col] == 1) // Up Row
-    // {
-    //     tempString += 'U';
-    //     helperFunction(maze, tempString, answer, row-1, col);
-    //     tempString.pop_back();
-    // }
+    maze[row][col] = -1;
+    helperFunction(maze, tempString+"R", answer, row, col+1); // Right Column
+    helperFunction(maze, tempString+"D", answer, row+1, col); // Down Row
+    helperFunction(maze, tempString+"L", answer, row, col-1); // Left Column
+    helperFunction(maze, tempString+"U", answer, row-1, col); // Up Row
+    maze[row][col] = 1;
 }
 
+// TC: O(4^(n*n))
 std::vector<std::string> ratInMaze(std::vector<std::vector<int>>& maze)
 {
     std::vector<std::string> answer;
-    std::string tempString;
-    helperFunction(maze, tempString, answer, 0, 0);
+    helperFunction(maze, "", answer, 0, 0);
     return answer;
 }
 
